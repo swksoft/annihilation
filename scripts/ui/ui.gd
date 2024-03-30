@@ -13,7 +13,6 @@ var current_player: Player
 @onready var level_data = get_parent().get_parent().get_node("Level")
 @onready var player_data = get_parent().get_node("Players").get_children()
 
-@export var power_label : Label
 @export var power_input : LineEdit
 
 func _ready():
@@ -21,7 +20,6 @@ func _ready():
 	current_player = player_data[0]  # TODO: esto debe cambiar
 	%AngleEdit.text = str(current_player.rot)
 	change_power()
-	power_label.text = str(power_input.text)
 	
 	#print("PLAYER DATA: ", typeof(player_data[0]))
 	# TODO: Cargar puntuación de jugador 1 y 2
@@ -59,8 +57,7 @@ func _process(delta):
 	
 func change_power():
 	var cannon = current_player.get_node("Cannon") as Cannon
-	power_label.text = str(power_input.text)
-	cannon.power = float(power_label.text)
+	cannon.power = float(power_input.text)
 	
 
 func _on_button_pressed():
@@ -86,10 +83,10 @@ func _on_angle_more_button_pressed():
 
 ''' POWER BUTTONS '''
 func _on_power_less_button_pressed():
-	power_input.text = str(float(power_label.text) - 1)
+	power_input.text = str(float(power_input.text) - 1)
 	change_power()
 func _on_power_more_button_pressed():
-	power_input.text = str(float(power_label.text) + 1)
+	power_input.text = str(float(power_input.text) + 1)
 	change_power()
 func _on_power_edit_text_changed(new_text):
 	change_power()
