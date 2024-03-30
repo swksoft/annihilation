@@ -30,7 +30,7 @@ texture = SubResource("AtlasTexture_nfrlg")
 position = Vector2(-9, 0)
 texture = SubResource("AtlasTexture_xfkf1")
 
-[node name="Cannon" parent="." instance=ExtResource("3_6ia0s")]
+[node name="Cannon" parent="." groups=["cannon"] instance=ExtResource("3_6ia0s")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8p4ai")
