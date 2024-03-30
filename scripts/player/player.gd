@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export_range(-195, 18) var rot = -90
 @export_range(0, 5000) var force: int = 1000 # velocity.x

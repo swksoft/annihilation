@@ -1,6 +1,7 @@
-extends Node2D
-
+class_name Cannon extends Node2D
 @export var missile_rigid_scene: PackedScene = preload("res://scenes/player/missile_rigid.tscn")
+
+var power = 0
 
 @onready var marker = $Sprite2D2/Marker2D
 
@@ -14,7 +15,7 @@ func _ready():
 func fire_missile(force):
 	var missile_rigid = missile_rigid_scene.instantiate()
 	missile_rigid.position = marker.global_position
-	missile_rigid.linear_velocity.x = 1000 # Hardcoded
+	missile_rigid.linear_velocity.x = power # Hardcoded
 	#get_tree().get_root().add_child(missile_rigid)
 	get_parent().get_parent().add_child(missile_rigid)
 	print_debug("Disparar misil")

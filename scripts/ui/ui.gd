@@ -6,15 +6,20 @@ extends Control
 # FIXME: Oh, cáspita! Los grados se pasan, fijate que los grados no pasen del rango -195 al 18
 
 var deactivate_controls: bool = false
-var current_player: Object
+var current_player: Player
 
 @onready var level_data = get_parent().get_parent().get_node("Level")
 @onready var player_data = get_parent().get_node("Players").get_children()
+
+@export var power_label : Label
+@export var power_input : LineEdit
 
 func _ready():
 	''' OBTENER ESCENA DE TODOS LOS PLAYERS '''
 	current_player = player_data[0]  # TODO: esto debe cambiar
 	%AngleEdit.text = str(current_player.rot)
+	change_power()
+	power_label.text = str(power_input.text)
 	
 	
 	#print("PLAYER DATA: ", typeof(player_data[0]))
@@ -44,6 +49,12 @@ func _process(delta):
 	elif Input.is_action_pressed("dec_angle"): _on_angle_more_button_pressed()
 	elif Input.is_action_pressed("inc_power"): _on_power_less_button_pressed()
 	elif Input.is_action_pressed("dec_power"): _on_power_more_button_pressed()
+	
+func change_power():
+	var cannon = current_player.get_node("Cannon") as Cannon
+	power_label.text = str(power_input.text)
+	cannon.power = float(power_label.text)
+	
 
 func _on_button_pressed():
 	# TODO: fire_button debe chequear que esté todo en orden
@@ -68,9 +79,13 @@ func _on_angle_more_button_pressed():
 
 ''' POWER BUTTONS '''
 func _on_power_less_button_pressed():
-	print_debug("increase_power")
+	power_input.text = str(float(power_label.text) - 1)
+	change_power()
 func _on_power_more_button_pressed():
-	print_debug("decrease_power")
+	power_input.text = str(float(power_label.text) + 1)
+	change_power()
+func _on_power_edit_text_changed(new_text):
+	change_power()
 
 ''' SHOOT MODE '''
 func _on_check_button_toggled(toggled_on):
@@ -79,3 +94,5 @@ func _on_check_button_toggled(toggled_on):
 func _on_angle_edit_text_changed(new_text):
 	#if new_text
 	current_player.rot = int(new_text)
+
+
