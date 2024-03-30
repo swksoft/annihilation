@@ -8,7 +8,7 @@ var turn_order = []
 func reorganize_turns(player_list, current_turn):
 	var index = player_list.find(current_turn)
 	var turn_order = player_list
-	turn_order.rotate(-index) # Rotar la lista para que el jugador con turno esté en el índice 0
+	#turn_order.rotate(-index) # Rotar la lista para que el jugador con turno esté en el índice 0
 	return turn_order
 
 func start_game(player_list):

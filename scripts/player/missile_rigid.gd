@@ -9,6 +9,11 @@ class_name Missile
 func _draw():
 	draw_circle(Vector2.ZERO, 5, Color.BLACK)
 
+func _ready():
+	Engine.time_scale = 0.20
+	await get_tree().create_timer(0.5, true, false, true).timeout
+	Engine.time_scale = 1
+
 func explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = global_position
@@ -16,7 +21,8 @@ func explosion():
 	queue_free()
 	
 func _on_body_entered(body):
-	explosion()
+	if body.is_in_group("Player"):
+		explosion()
 	
 func _on_area_explosiva_area_entered(area):
 	if area.is_in_group("Terrain"):
@@ -24,3 +30,7 @@ func _on_area_explosiva_area_entered(area):
 
 func _on_timer_timeout():
 	explosion()
+
+func _on_area_explosiva_body_entered(body):
+	if body.is_in_group("Terrain") or body.is_in_group("Player"):
+		explosion()

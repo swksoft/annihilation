@@ -17,14 +17,15 @@ func _on_area_entered(area):
 
 func _on_body_entered(body):
 	# TODO: Dañar enemigo de acuerdo a lo cerca que esté de la onda expansiva
-	var x1 = body.global_position.x
-	var y1 = body.global_position.y
-	var x2 = self.position.x
-	var y2 = self.position.y
-	#var point_modifier = (body.global_position - self.position)
-	var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
-	var total_points = points / (point_modifier / 100)
-	pass
+	if body.is_in_group("Player"):
+		var x1 = body.global_position.x
+		var y1 = body.global_position.y
+		var x2 = self.position.x
+		var y2 = self.position.y
+		#var point_modifier = (body.global_position - self.position)
+		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
+		var total_points = points / (point_modifier / 100)
+		print(total_points)
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()

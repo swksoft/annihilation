@@ -3,7 +3,7 @@ class_name Cannon extends Node2D
 
 var power = 0
 
-@onready var marker = $Sprite2D2/Marker2D
+@onready var marker = $Sprite2D/Sprite2D2/Marker2D
 
 func _ready():
 	pass

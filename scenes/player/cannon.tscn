@@ -15,15 +15,13 @@ region = Rect2(96, 0, 32, 32)
 script = ExtResource("1_0tsga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
 texture = SubResource("AtlasTexture_rsnrh")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(20, -1.77636e-14)
-rotation = 1.5708
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, -20)
 texture = SubResource("AtlasTexture_bd7ow")
 
-[node name="Marker2D" type="Marker2D" parent="Sprite2D2"]
+[node name="Marker2D" type="Marker2D" parent="Sprite2D/Sprite2D2"]
 position = Vector2(8.87513e-05, -15)
 rotation = -1.5708
 scale = Vector2(20, 20)
