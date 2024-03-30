@@ -21,6 +21,21 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_31ux5"]
 radius = 60.0
 
+[sub_resource type="Animation" id="Animation_xat2e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_vgees")]
+}
+
 [sub_resource type="Animation" id="Animation_8t3dk"]
 resource_name = "explosion"
 length = 1.50001
@@ -36,21 +51,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("2_cg6bv"), ExtResource("3_vgees"), ExtResource("4_7mkbs"), ExtResource("5_0crpw"), ExtResource("6_svq18"), ExtResource("7_86xum"), ExtResource("8_p5j7w"), ExtResource("9_1d0ms"), ExtResource("10_4ekik"), ExtResource("11_7dgq5"), ExtResource("12_uib1w"), ExtResource("13_eftvk"), ExtResource("14_s1vah"), ExtResource("15_8v02y"), ExtResource("16_dht3h"), ExtResource("17_d6jcc")]
-}
-
-[sub_resource type="Animation" id="Animation_xat2e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_vgees")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyoqm"]

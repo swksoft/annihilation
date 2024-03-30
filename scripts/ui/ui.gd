@@ -5,6 +5,8 @@ extends Control
 
 # FIXME: Oh, cáspita! Los grados se pasan, fijate que los grados no pasen del rango -195 al 18
 
+@export var screen_message: PackedScene = preload("res://scenes/hud/screen_message.tscn")
+
 var deactivate_controls: bool = false
 var current_player: Object
 
@@ -15,7 +17,6 @@ func _ready():
 	''' OBTENER ESCENA DE TODOS LOS PLAYERS '''
 	current_player = player_data[0]  # TODO: esto debe cambiar
 	%AngleEdit.text = str(current_player.rot)
-	
 	
 	#print("PLAYER DATA: ", typeof(player_data[0]))
 	# TODO: Cargar puntuación de jugador 1 y 2
@@ -31,7 +32,13 @@ func _ready():
 	#get_tree().call_group("Button", "set_disabled", true)
 	#get_tree().call_group("Edit", "set_editable", not true)
 	
-	pass
+	''' Mensaje inicial '''
+	display_message()
+	
+func display_message():
+	var message = screen_message.instantiate()
+	message.message_text = "Begin!"
+	add_child(message)
 
 func _process(delta):
 	# TODO: Quiero que todos los botones se muestren presionados cuando se realiza un input del teclado (jugo)

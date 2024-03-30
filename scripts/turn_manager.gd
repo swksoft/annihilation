@@ -1,49 +1,61 @@
 extends Node
 
-var players = []
-var current_turn = -1
+var turn = 0
 var max_turns = 5
-var scores = {} 
+var current_turn: Object
+var turn_order = []
 
-func start_game():
-	start_next_turn()
+func reorganize_turns(player_list, current_turn):
+	var index = player_list.find(current_turn)
+	var turn_order = player_list
+	turn_order.rotate(-index) # Rotar la lista para que el jugador con turno esté en el índice 0
+	return turn_order
 
-func start_next_turn():
-	if players.size() == 0:
-		return
+func start_game(player_list):
+	start_next_turn(player_list)
+
+func start_next_turn(player_list):
+	turn += 1
+	if turn > max_turns:
+		turn = 0
 	
-	current_turn += 1
-	if current_turn >= players.size():
-		current_turn = 0
-	
-	players[current_turn].start_turn()
+	if turn == 1:
+		''' Determine who's first '''
+		randomize()
+		print(player_list)
+		current_turn = player_list[randi() % player_list.size()]
+		print_debug(current_turn)
+		''' Reorganize List '''
+		turn_order = reorganize_turns(player_list, current_turn)
+		print(" NUEVO ORDEN MUNDIAL: ", turn_order)
+		
 
-	# Verificar si la partida ha terminado
-	if current_turn == 0 and current_turn >= max_turns:
+	if turn <= 0:
 		end_game()
+	
+	print("RONDA #", turn)
+	print(current_turn, " empieza!!")
+		
+	return current_turn
 
 func end_game():
-	var winner = get_winner()
-	print("El ganador es:", winner)
+	print("==== JUEGO TERMINADO ====")
+	print("El ganador es:", get_winner())
 
 func get_winner():
-	var max_score = -1
-	var winner = null
-	for player in scores.keys():
-		if scores[player] > max_score:
-			max_score = scores[player]
-			winner = player
-	return winner
+	if GLOBAL.p1_points > GLOBAL.p2_points:
+		return GLOBAL.p1_name + "ha ganado!"
+	elif GLOBAL.p1_points == GLOBAL.p2_points:
+		return "Empate"
+	else:
+		return GLOBAL.p2_name + "ha ganado!"
 
-func end_turn(player_name, score_delta):
-	if players.size() == 0:
+func end_turn(player_list, player_name):
+	if player_list.size() == 0:
 		return
 	
-	scores[player_name] += score_delta
-	start_next_turn()
+	start_next_turn(player_list)
 
-func get_current_player():
-	if players.size() == 0:
-		return null
+func get_current_player(player_list):
 	
-	return players[current_turn]
+	return player_list[current_turn]
