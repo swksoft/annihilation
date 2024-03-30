@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7q158bi38r2u"]
+
+[ext_resource type="Script" path="res://scripts/level/wind_area.gd" id="1_ax0l0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjdwl"]
+size = Vector2(1281, 721)
+
+[node name="WindArea" type="Area2D"]
+gravity_space_override = 1
+script = ExtResource("1_ax0l0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(639.5, 359.5)
+shape = SubResource("RectangleShape2D_kjdwl")
+debug_color = Color(0, 0.6, 0.701961, 0)

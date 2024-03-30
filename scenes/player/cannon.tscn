@@ -24,6 +24,6 @@ rotation = 1.5708
 texture = SubResource("AtlasTexture_bd7ow")
 
 [node name="Marker2D" type="Marker2D" parent="Sprite2D2"]
-position = Vector2(-1.74846e-06, -40)
+position = Vector2(8.87513e-05, -15)
 rotation = -1.5708
 scale = Vector2(20, 20)

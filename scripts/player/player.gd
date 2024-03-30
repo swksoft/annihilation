@@ -20,7 +20,10 @@ func _ready():
 	''' Rotation '''
 	cannon.rotation_degrees = rot
 
-
+func _physics_process(delta):
+	cannon.rotation_degrees = rot
+	
+	
 
 func attack():
-	pass
+	cannon.fire_missile(force)

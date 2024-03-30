@@ -17,6 +17,7 @@ size = Vector2(30, 30)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_ijle7")
+rot = -195
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 position = Vector2(9, 0)

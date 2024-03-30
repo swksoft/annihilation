@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var screen_message: PackedScene
+@export_range(-100, 100) var wind_force: int = 0
 
 var current_turn
 
@@ -12,6 +13,8 @@ func display_message():
 	add_child(message)
 
 func _ready():
+	RenderingServer.set_default_clear_color(Color("677e7c"))
+	
 	''' Who's who?????? '''
 	for i in players:
 		match i.get_name():
