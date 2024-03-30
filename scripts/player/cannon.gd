@@ -13,9 +13,10 @@ func _ready():
 	#self.global_rotagion = deg_to_rad(player_data.rot)
 
 func fire_missile(force):
-	var missile_rigid = missile_rigid_scene.instantiate()
+	var missile_rigid = missile_rigid_scene.instantiate() as Missile
 	missile_rigid.position = marker.global_position
-	missile_rigid.linear_velocity.x = power # Hardcoded
+	var direction = Vector2(cos(marker.global_rotation), sin(marker.global_rotation))
+	missile_rigid.linear_velocity = power * direction
 	#get_tree().get_root().add_child(missile_rigid)
 	get_parent().get_parent().add_child(missile_rigid)
 	print_debug("Disparar misil")
