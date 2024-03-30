@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="annihilation"
+run/main_scene="res://scenes/hud/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="annihilation"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://icon.svg"
+
+[autoload]
+
+GLOBAL="*res://scripts/global.gd"
+TurnManager="*res://scripts/turn_manager.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+
+[gui]
+
+theme/custom_font="res://fonts/PixeloidSans.ttf"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

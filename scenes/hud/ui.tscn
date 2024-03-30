@@ -1,0 +1,268 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2mo75fmsvcfr"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_2tqgv"]
+[ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_3rsrc"]
+[ext_resource type="FontFile" uid="uid://blrpp31mfd27a" path="res://fonts/PixeloidSans.ttf" id="3_ewlax"]
+
+[sub_resource type="Theme" id="Theme_g7hbd"]
+default_font_size = 24
+PanelContainer/fonts/a = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7321o"]
+atlas = ExtResource("2_3rsrc")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjp76"]
+atlas = ExtResource("2_3rsrc")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ell5"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.733333, 0.733333, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6utt6"]
+bg_color = Color(0.733333, 0.733333, 1, 0)
+border_width_right = 5
+border_color = Color(0.333333, 0.266667, 0.6, 1)
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_lhddd"]
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/constants/outline_size = 0
+ProgressBar/font_sizes/font_size = 16
+ProgressBar/fonts/font = ExtResource("3_ewlax")
+ProgressBar/styles/a = null
+ProgressBar/styles/background = SubResource("StyleBoxFlat_0ell5")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_6utt6")
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2tqgv")
+metadata/_edit_vertical_guides_ = [640.0, 320.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainUI" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -86.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_g7hbd")
+
+[node name="ControlsContainer" type="PanelContainer" parent="CanvasLayer/MainUI"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VBoxControls" type="VBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxControlsUpper" type="HBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls"]
+layout_mode = 2
+
+[node name="VBoxAngle" type="VBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper"]
+layout_mode = 2
+
+[node name="AngleLabel" type="Label" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Angle"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 3
+
+[node name="AngleLessButton" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle/GridContainer" groups=["Button"]]
+layout_mode = 2
+action_mode = 0
+text = "A"
+
+[node name="AngleEdit" type="LineEdit" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle/GridContainer" groups=["Edit"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "60°"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+
+[node name="AngleMoreButton" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle/GridContainer" groups=["Button"]]
+layout_mode = 2
+action_mode = 0
+text = "D"
+
+[node name="VBoxAngle2" type="VBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper"]
+layout_mode = 2
+
+[node name="GiveUpLabel" type="Label" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Give Up
+"
+
+[node name="GiveUpButton" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle2" groups=["Button"]]
+layout_mode = 2
+text = "[F1]"
+
+[node name="VBoxPower" type="VBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper"]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Power
+"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 3
+
+[node name="PowerLessButton" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower/GridContainer" groups=["Button"]]
+layout_mode = 2
+action_mode = 0
+text = "<"
+
+[node name="PowerEdit" type="LineEdit" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower/GridContainer" groups=["Edit"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "30"
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+
+[node name="PowerMoreButton" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower/GridContainer" groups=["Button"]]
+layout_mode = 2
+action_mode = 0
+text = ">"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="FireLabel" type="Label" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/MainUI/ControlsContainer/VBoxControls/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+text = "[SPACE]"
+
+[node name="HBoxData" type="HBoxContainer" parent="CanvasLayer/MainUI"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="VBoxPlayer" type="VBoxContainer" parent="CanvasLayer/MainUI/HBoxData"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="P1Container" type="PanelContainer" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer"]
+layout_mode = 2
+
+[node name="P1Name" type="Label" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer/P1Container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="P1PointsLabel" type="Label" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer"]
+layout_mode = 2
+text = "000000 pts"
+
+[node name="P2Container" type="PanelContainer" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer"]
+layout_mode = 2
+
+[node name="P2Name" type="Label" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer/P2Container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="P2PointsLabel" type="Label" parent="CanvasLayer/MainUI/HBoxData/VBoxPlayer/GridContainer"]
+layout_mode = 2
+text = "000000 pts"
+
+[node name="VBoxPoints" type="VBoxContainer" parent="CanvasLayer/MainUI/HBoxData"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="WindPollo" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/WindPollo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/v_separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WindPollo/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_7321o")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/WindPollo/GridContainer"]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_wjp76")
+expand_mode = 1
+
+[node name="WindBar" type="ProgressBar" parent="CanvasLayer/WindPollo"]
+custom_minimum_size = Vector2(0, 9.81)
+layout_mode = 2
+theme = SubResource("Theme_lhddd")
+min_value = -50.0
+max_value = 50.0
+show_percentage = false
+
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle/GridContainer/AngleLessButton" to="." method="_on_angle_less_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle/GridContainer/AngleMoreButton" to="." method="_on_angle_more_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxAngle2/GiveUpButton" to="." method="_on_give_up_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower/GridContainer/PowerLessButton" to="." method="_on_power_less_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/HBoxControlsUpper/VBoxPower/GridContainer/PowerMoreButton" to="." method="_on_power_more_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainUI/ControlsContainer/VBoxControls/VBoxContainer/Button" to="." method="_on_button_pressed"]

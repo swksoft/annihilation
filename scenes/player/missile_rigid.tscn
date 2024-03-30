@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://frtn2ew3dpew"]
+
+[ext_resource type="Script" path="res://scripts/player/missile_rigid.gd" id="1_pk4gg"]
+[ext_resource type="PackedScene" uid="uid://cvj2wgdg4u2d6" path="res://scenes/player/trails.tscn" id="2_8t0qs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crocp"]
+
+[sub_resource type="Curve" id="Curve_rkhjx"]
+_data = [Vector2(0.00227273, 1), 0.0, 0.0, 0, 0, Vector2(0.997727, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MissileRigid" type="RigidBody2D"]
+mass = 50.0
+script = ExtResource("1_pk4gg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_crocp")
+
+[node name="Line2D" parent="." instance=ExtResource("2_8t0qs")]
+width_curve = SubResource("Curve_rkhjx")
+default_color = Color(0, 0, 0, 0.529412)
+MAX_LENGHT = 10
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

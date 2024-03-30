@@ -1,0 +1,150 @@
+[gd_scene load_steps=2 format=3 uid="uid://yomjwdbcrnp"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_hlocj"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hlocj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="BoxContainer3" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -31.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer3"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player 1 name:"
+
+[node name="LineEdit1" type="LineEdit" parent="BoxContainer3/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+placeholder_text = "PLAYER1"
+max_length = 10
+context_menu_enabled = false
+shortcut_keys_enabled = false
+
+[node name="HSeparator" type="HSeparator" parent="BoxContainer3/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(375, 0)
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="BoxContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Player 2 name:"
+
+[node name="LineEdit2" type="LineEdit" parent="BoxContainer3/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+placeholder_text = "PLAYER 2
+"
+max_length = 10
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Company" type="Label" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SwkSoft presents..."
+
+[node name="Title" type="Label" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ANNHILATION: ULTIMATE SHOWDOWN
+"
+horizontal_alignment = 1
+
+[node name="SubTitle" type="Label" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Obliterate for the Sake of Justice! :D"
+horizontal_alignment = 1
+
+[node name="BoxContainer2" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer2"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="BoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "Play"
+
+[node name="Exit" type="Button" parent="BoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "Exit"
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ver 3.24.1"
+
+[connection signal="text_changed" from="BoxContainer3/HBoxContainer/VBoxContainer/LineEdit1" to="." method="_on_line_edit_1_text_changed"]
+[connection signal="text_changed" from="BoxContainer3/HBoxContainer/VBoxContainer2/LineEdit2" to="." method="_on_line_edit_2_text_changed"]
+[connection signal="pressed" from="BoxContainer2/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="BoxContainer2/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

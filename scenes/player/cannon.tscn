@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://navi25jvosua"]
+
+[ext_resource type="Script" path="res://scripts/player/cannon.gd" id="1_0tsga"]
+[ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_20gqy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsnrh"]
+atlas = ExtResource("2_20gqy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd7ow"]
+atlas = ExtResource("2_20gqy")
+region = Rect2(96, 0, 32, 32)
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_0tsga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = SubResource("AtlasTexture_rsnrh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(20, -1.77636e-14)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_bd7ow")
+
+[node name="Marker2D" type="Marker2D" parent="Sprite2D2"]
+position = Vector2(-1.74846e-06, -40)
+rotation = -1.5708
+scale = Vector2(20, 20)

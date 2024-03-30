@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://csrihit1rg1d4"]
+
+[ext_resource type="Script" path="res://scripts/level/level.gd" id="1_c0efh"]
+[ext_resource type="PackedScene" uid="uid://b2r6e10mj78og" path="res://scenes/map/level_00.tscn" id="1_ro0kk"]
+[ext_resource type="PackedScene" uid="uid://bxaujqfon0k7d" path="res://scenes/hud/screen_message.tscn" id="2_77fo4"]
+[ext_resource type="PackedScene" uid="uid://d2dudxcs57rmj" path="res://scenes/player/player.tscn" id="2_clir6"]
+[ext_resource type="PackedScene" uid="uid://d2mo75fmsvcfr" path="res://scenes/hud/ui.tscn" id="4_ykgrc"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_c0efh")
+screen_message = ExtResource("2_77fo4")
+
+[node name="Level00" parent="." instance=ExtResource("1_ro0kk")]
+position = Vector2(0, -83)
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Player1" parent="Players" instance=ExtResource("2_clir6")]
+process_mode = 1
+position = Vector2(90, 185)
+metadata/_edit_group_ = true
+
+[node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
+position = Vector2(569, 182)
+metadata/_edit_group_ = true
+
+[node name="UI" parent="." instance=ExtResource("4_ykgrc")]
+
+[editable path="Players/Player1"]
+[editable path="Players/Player2"]

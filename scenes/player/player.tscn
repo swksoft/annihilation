@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2dudxcs57rmj"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ijle7"]
+[ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_nib68"]
+[ext_resource type="PackedScene" uid="uid://navi25jvosua" path="res://scenes/player/cannon.tscn" id="3_6ia0s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfkf1"]
+atlas = ExtResource("2_nib68")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfrlg"]
+atlas = ExtResource("2_nib68")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4ai"]
+size = Vector2(30, 30)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_ijle7")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(9, 0)
+texture = SubResource("AtlasTexture_xfkf1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_nfrlg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-9, 0)
+texture = SubResource("AtlasTexture_xfkf1")
+
+[node name="Cannon" parent="." instance=ExtResource("3_6ia0s")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8p4ai")
+
+[node name="PlayerName" type="Label" parent="."]
+offset_left = -22.0
+offset_top = -40.0
+offset_right = 26.0
+offset_bottom = -17.0
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
