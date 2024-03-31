@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://csrihit1rg1d4"]
+[gd_scene load_steps=7 format=3 uid="uid://csrihit1rg1d4"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_c0efh"]
 [ext_resource type="PackedScene" uid="uid://b2r6e10mj78og" path="res://scenes/map/level_00.tscn" id="1_ro0kk"]
 [ext_resource type="PackedScene" uid="uid://d2dudxcs57rmj" path="res://scenes/player/player.tscn" id="2_clir6"]
 [ext_resource type="PackedScene" uid="uid://d2mo75fmsvcfr" path="res://scenes/hud/ui.tscn" id="4_ykgrc"]
+[ext_resource type="PackedScene" uid="uid://frtn2ew3dpew" path="res://scenes/player/missile_rigid.tscn" id="6_jjw18"]
 [ext_resource type="PackedScene" uid="uid://b7q158bi38r2u" path="res://scenes/map/wind_area.tscn" id="7_leu7k"]
 
 [node name="Level" type="Node2D"]
@@ -30,6 +31,7 @@ metadata/_edit_group_ = true
 
 [node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
 position = Vector2(408, 281)
+player_index = 1
 
 [node name="UI" parent="." instance=ExtResource("4_ykgrc")]
 metadata/_edit_vertical_guides_ = [640.0, 320.0]
@@ -39,6 +41,9 @@ anchor_mode = 0
 
 [node name="WindArea" parent="." instance=ExtResource("7_leu7k")]
 metadata/_edit_lock_ = true
+
+[node name="MissileRigid" parent="." instance=ExtResource("6_jjw18")]
+position = Vector2(325, 339)
 
 [connection signal="game_end" from="." to="." method="_on_game_end"]
 [connection signal="game_end" from="." to="UI" method="_on_level_game_end"]
@@ -53,3 +58,4 @@ metadata/_edit_lock_ = true
 [editable path="Level00"]
 [editable path="Level01"]
 [editable path="Players/Player1"]
+[editable path="MissileRigid"]

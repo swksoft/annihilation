@@ -15,7 +15,6 @@ func _ready():
 	#self.global_rotagion = deg_to_rad(player_data.rot)
 
 func fire_missile(force, current_mode):
-	
 	var missile_rigid : Missile
 	
 	match current_mode:

@@ -78,7 +78,8 @@ func change_power():
 func _on_button_pressed():
 	# TODO: fire_button debe chequear que esté todo en orden
 	
-	print_debug("fire_button")
+	#current_player.my_turn(true)
+	#print_debug("fire_button")
 	current_player.attack()
 	
 	emit_signal("end_turn")
@@ -144,7 +145,11 @@ func _on_wind_area_new_wind(wind):
 		$CanvasLayer/WindPollo/GridContainer/TextureRect2.flip_h = true
 
 func _on_level_turn_start(player):
-	print_debug(player, " cringe")
-	#get_path()
+	#print_debug(player, " cringe")
+	
+	display_message(str(player.name) + "'s turn!")
+	#player.my_turn(true)
 	current_player = player
-	print(player)
+	#current_player.name = player
+	current_player.my_turn(true)
+	#print(player)

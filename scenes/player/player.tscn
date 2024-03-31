@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2dudxcs57rmj"]
+[gd_scene load_steps=14 format=3 uid="uid://d2dudxcs57rmj"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ijle7"]
 [ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_noldq"]
 [ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_nib68"]
 [ext_resource type="PackedScene" uid="uid://navi25jvosua" path="res://scenes/player/cannon.tscn" id="3_6ia0s"]
 [ext_resource type="Material" uid="uid://1r6o31ib20nh" path="res://scenes/player/shader/hurt.tres" id="3_70yg6"]
+[ext_resource type="Texture2D" uid="uid://jpkerpporx18" path="res://assets/sprites/arrow/arrowani1.png" id="6_7y4nl"]
+[ext_resource type="Texture2D" uid="uid://df3rjt70465ap" path="res://assets/sprites/arrow/arrowani2.png" id="7_cd0wa"]
+[ext_resource type="Texture2D" uid="uid://dxh7irnipt2wb" path="res://assets/sprites/arrow/arrowani4.png" id="8_5b56u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qcfgv"]
 shader = ExtResource("1_noldq")
@@ -24,6 +27,23 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4ai"]
 size = Vector2(34, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3olc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7y4nl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cd0wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5b56u")
+}],
+"loop": true,
+"name": &"my_turn",
+"speed": 8.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 material = SubResource("ShaderMaterial_qcfgv")
@@ -61,5 +81,14 @@ vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Turn" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-13, -74)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_e3olc")
+animation = &"my_turn"
+autoplay = "my_turn"
+frame_progress = 0.323753
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

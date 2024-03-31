@@ -6,19 +6,32 @@ signal turn_end
 
 @export_range(-108, 108) var rot = 90
 @export_range(0, 5000) var force: int = 1000 # velocity.x
+@export var player_index = 0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum MODE{SHOOT_ATTACK, SHOOT_TP}
 var current_mode = MODE.SHOOT_ATTACK
+var p_name
+var can_shoot = false
 
 @onready var level_data = get_parent().get_parent()
 @onready var cannon = $Cannon
 
+func my_turn(is_it):
+	if is_it:
+		$Turn.visible = true
+		print("activate")
+	else:
+		$Turn.visible = false
+		print("deactivate")
+
 func _ready():
 	if get_name() == "Player1":
-		$PlayerName.text = GLOBAL.p1_name
+		p_name = GLOBAL.p1_name
+		$PlayerName.text = p_name
 	elif get_name() == "Player2":
-		$PlayerName.text = GLOBAL.p2_name
+		p_name = GLOBAL.p2_name
+		$PlayerName.text = p_name
 	
 	# TODO: Ajustar
 	''' Skin '''
@@ -37,13 +50,14 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func attack():
+	my_turn(false)
 	emit_signal("turn_end")
 	cannon.fire_missile(force, current_mode)
 
 func _on_change_mode():
 	print("pija")
 	
-func damage():
+func damage(player_index):
 	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
 	$Timer.start()
 	for i in sprite:

@@ -23,10 +23,6 @@ var current_turn = 0
 func _ready():
 	RenderingServer.set_default_clear_color(Color("677e7c"))
 
-	#TurnManager.start_game(players)
-	
-	#next_round()
-	turn_order[current_turn]
 	if players.size() == 0:
 		emit_signal("game_end")
 	else:
@@ -43,24 +39,18 @@ func next_round():
 		''' 6) Repeat rounds until end'''
 		emit_signal("game_end")
 	else:
-		print("\n===== RONDA #", TurnManager.round, "\n")
+		print("\n===== RONDA #", TurnManager.round)
 		''' 4) Start Player Turn'''
 		next_turn()
-		#emit_signal("round_start")
 
 ''' 4) Start Player Turn'''
 func next_turn():
 	is_battling = true
 	
 	if current_turn < turn_order.size():
+		print("\nTurno de, ", current_turn)
 		emit_signal("turn_start", turn_order[current_turn]) # Manda señal a hud
 		return
-	
-	#for current_turn in total_turns:
-		#print("TURNO ", current_turn+1, ": ", turn_order[current_turn])
-		#emit_signal("turn_start", turn_order[current_turn]) # Manda señal a hud
-		##current_turn += 1
-		#return
 	
 	current_turn = 0
 	
@@ -75,7 +65,6 @@ func _on_ui_end_turn():
 
 ''' 6) Repeat rounds until end'''
 func _on_game_end():
-	#get_tree().change_scene_to_file("res://scenes/hud/main_menu.tscn")
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/hud/main_menu.tscn")
 
 func _on_round_end():

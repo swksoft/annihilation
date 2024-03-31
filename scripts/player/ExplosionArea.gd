@@ -12,12 +12,15 @@ func gor_down():
 	gor_down = "gor_down" # Gor Down # FIXME: Gor Down
 
 func _on_area_entered(area):
-	# TODO: Destuir area
+	print_debug(area)
 	pass
 
 func _on_body_entered(body):
 	# TODO: Dañar enemigo de acuerdo a lo cerca que esté de la onda expansiva
-	if body.is_in_group("Player"):
+	#if body.is_in_group("Player"):
+	print_debug(body.get_name())
+	if body.has_method("damage") and body.player_index == 1:
+		print("este es mi cuerpo: ", body)
 		var x1 = body.global_position.x
 		var y1 = body.global_position.y
 		var x2 = self.position.x
@@ -26,7 +29,11 @@ func _on_body_entered(body):
 		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
 		var total_points = points / (point_modifier / 100)
 		print(total_points)
-		body.damage()
+		body.damage(body.player_index)
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
+
+func _on_area_destruction_body_entered(body):
+	if body.is_in_group("Terrain"):
+		body.clip($AreaDestruction/DestructionPolygon)
