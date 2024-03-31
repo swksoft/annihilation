@@ -1,7 +1,7 @@
 extends Node
 
-var turn = 0
-var max_turns = 5
+var round = 0
+var max_round = 5
 var current_turn: Object
 var turn_order = []
 
@@ -15,11 +15,11 @@ func start_game(player_list):
 	start_next_turn(player_list)
 
 func start_next_turn(player_list):
-	turn += 1
-	if turn > max_turns:
-		turn = 0
+	round += 1
+	if round > max_round:
+		round = 0
 	
-	if turn == 1:
+	if round == 1:
 		''' Determine who's first '''
 		randomize()
 		print(player_list)
@@ -30,10 +30,10 @@ func start_next_turn(player_list):
 		print(" NUEVO ORDEN MUNDIAL: ", turn_order)
 		
 
-	if turn <= 0:
+	if round <= 0:
 		end_game()
 	
-	print("RONDA #", turn)
+	print("RONDA #", round)
 	print(current_turn, " empieza!!")
 		
 	return current_turn
