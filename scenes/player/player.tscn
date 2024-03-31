@@ -1,8 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2dudxcs57rmj"]
+[gd_scene load_steps=10 format=3 uid="uid://d2dudxcs57rmj"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ijle7"]
+[ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_noldq"]
 [ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_nib68"]
 [ext_resource type="PackedScene" uid="uid://navi25jvosua" path="res://scenes/player/cannon.tscn" id="3_6ia0s"]
+[ext_resource type="Material" uid="uid://1r6o31ib20nh" path="res://scenes/player/shader/hurt.tres" id="3_70yg6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qcfgv"]
+shader = ExtResource("1_noldq")
+shader_parameter/opacity = null
+shader_parameter/r = 0.0
+shader_parameter/g = null
+shader_parameter/b = null
+shader_parameter/mix_color = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xfkf1"]
 atlas = ExtResource("2_nib68")
@@ -16,17 +26,20 @@ region = Rect2(32, 0, 32, 32)
 size = Vector2(34, 27)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+material = SubResource("ShaderMaterial_qcfgv")
 script = ExtResource("1_ijle7")
-force = 500
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
 position = Vector2(9, 0)
 texture = SubResource("AtlasTexture_xfkf1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
 texture = SubResource("AtlasTexture_nfrlg")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
 position = Vector2(-9, 0)
 texture = SubResource("AtlasTexture_xfkf1")
 
@@ -35,6 +48,7 @@ texture = SubResource("AtlasTexture_xfkf1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_8p4ai")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="PlayerName" type="Label" parent="."]
 offset_left = -23.0
@@ -44,3 +58,8 @@ offset_bottom = -29.0
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

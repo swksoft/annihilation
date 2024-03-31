@@ -15,7 +15,6 @@ var current_mode = MODE.SHOOT_ATTACK
 @onready var cannon = $Cannon
 
 func _ready():
-	print_debug("CURRENT, ", current_mode)
 	if get_name() == "Player1":
 		$PlayerName.text = GLOBAL.p1_name
 	elif get_name() == "Player2":
@@ -43,3 +42,19 @@ func attack():
 
 func _on_change_mode():
 	print("pija")
+	
+func damage():
+	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
+	$Timer.start()
+	for i in sprite:
+		i.material.set_shader_parameter("opacity", 0.7)
+		i.material.set_shader_parameter("r", 1.0)
+		i.material.set_shader_parameter("g", 0.0)
+		i.material.set_shader_parameter("b", 0.0)
+		i.material.set_shader_parameter("mix_color", 0.7)
+
+func _on_timer_timeout():
+	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
+	for i in sprite:
+		i.material.set_shader_parameter("opacity", 1.0)
+		i.material.set_shader_parameter("mix_color", 0.0)

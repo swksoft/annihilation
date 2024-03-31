@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://navi25jvosua"]
+[gd_scene load_steps=6 format=3 uid="uid://navi25jvosua"]
 
 [ext_resource type="Script" path="res://scripts/player/cannon.gd" id="1_0tsga"]
 [ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_20gqy"]
+[ext_resource type="Material" uid="uid://1r6o31ib20nh" path="res://scenes/player/shader/hurt.tres" id="2_ll2pf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsnrh"]
 atlas = ExtResource("2_20gqy")
@@ -15,10 +16,12 @@ region = Rect2(96, 0, 32, 32)
 script = ExtResource("1_0tsga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_ll2pf")
 rotation = -1.5708
 texture = SubResource("AtlasTexture_rsnrh")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+material = ExtResource("2_ll2pf")
 position = Vector2(0, -20)
 texture = SubResource("AtlasTexture_bd7ow")
 

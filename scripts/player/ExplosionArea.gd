@@ -26,6 +26,7 @@ func _on_body_entered(body):
 		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
 		var total_points = points / (point_modifier / 100)
 		print(total_points)
+		body.damage()
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()

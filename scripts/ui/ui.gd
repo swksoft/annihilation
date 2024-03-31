@@ -8,6 +8,7 @@ extends Control
 
 signal give_up
 signal change_mode
+signal end_turn
 
 @export var screen_message: PackedScene = preload("res://scenes/hud/screen_message.tscn")
 
@@ -20,12 +21,16 @@ var current_player: Player
 
 @export var power_input : LineEdit
 
+func disable_all_buttons():
+	get_tree().call_group("Button", "set_disabled", true)
+	get_tree().call_group("Edit", "set_editable", not true)
+
 func _ready():
 	''' OBTENER ESCENA DE TODOS LOS PLAYERS '''
-	current_player = player_data[0]  # TODO: esto debe cambiar
-	%AngleEdit.text = str(current_player.rot)
-	change_power()
-	%CheckButton.button_pressed = true
+	#current_player = player_data[0]  # TODO: esto debe cambiar
+	#%AngleEdit.text = str(current_player.rot)
+	#change_power()
+	#%CheckButton.button_pressed = true
 	#print("PLAYER DATA: ", typeof(player_data[0]))
 	# TODO: Cargar puntuación de jugador 1 y 2
 	# TODO: Cargar valores fuerza y ángulo de jugador 1 y 2
@@ -35,8 +40,8 @@ func _ready():
 	# TODO: Quitar/Brindar acceso a controles
 	# TODO: Cargar Nombres
 	# TODO: CheckButton debe estar siempre activado al inicio de ronda
-	%P1Name.text = GLOBAL.p1_name
-	%P2Name.text = GLOBAL.p2_name
+	#%P1Name.text = GLOBAL.p1_name
+	#%P2Name.text = GLOBAL.p2_name
 	#get_tree().call_group("Button", "set_disabled", true)
 	#get_tree().call_group("Edit", "set_editable", not true)
 	
@@ -57,8 +62,8 @@ func _process(delta):
 	elif Input.is_action_just_pressed("give_up"): _on_give_up_button_pressed()
 	elif Input.is_action_pressed("inc_angle"): _on_angle_less_button_pressed()
 	elif Input.is_action_pressed("dec_angle"): _on_angle_more_button_pressed()
-	elif Input.is_action_pressed("inc_power"): _on_power_less_button_pressed()
-	elif Input.is_action_pressed("dec_power"): _on_power_more_button_pressed()
+	elif Input.is_action_just_pressed("inc_power"): _on_power_less_button_pressed()
+	elif Input.is_action_just_pressed("dec_power"): _on_power_more_button_pressed()
 	elif Input.is_action_just_pressed("change_mode"):
 		if %CheckButton.button_pressed:
 			%CheckButton.button_pressed = false
@@ -75,6 +80,8 @@ func _on_button_pressed():
 	
 	print_debug("fire_button")
 	current_player.attack()
+	
+	emit_signal("end_turn")
 	
 	# TODO: Emite una señal al jugador correspondiente
 
@@ -97,10 +104,10 @@ func _on_angle_edit_text_changed(new_text):
 
 ''' POWER BUTTONS '''
 func _on_power_less_button_pressed():
-	power_input.text = str(int(power_input.text) - 10)
+	power_input.text = str(int(power_input.text) - 50)
 	change_power()
 func _on_power_more_button_pressed():
-	power_input.text = str(int(power_input.text) + 10)
+	power_input.text = str(int(power_input.text) + 50)
 	change_power()
 
 func _on_power_edit_text_changed(new_text):
@@ -135,4 +142,9 @@ func _on_wind_area_new_wind(wind):
 	else:
 		$CanvasLayer/WindPollo/GridContainer/TextureRect.flip_h = true
 		$CanvasLayer/WindPollo/GridContainer/TextureRect2.flip_h = true
-		
+
+func _on_level_turn_start(player):
+	print_debug(player, " cringe")
+	#get_path()
+	current_player = player
+	print(player)

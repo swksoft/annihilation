@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://1r6o31ib20nh"]
+
+[ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_djpti"]
+
+[resource]
+shader = ExtResource("1_djpti")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 1.0
+shader_parameter/mix_color = 0.0
