@@ -3,6 +3,7 @@
 [ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_djpti"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_djpti")
 shader_parameter/opacity = 1.0
 shader_parameter/r = 1.0

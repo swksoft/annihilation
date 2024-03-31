@@ -57,8 +57,9 @@ func attack():
 func _on_change_mode():
 	print("pija")
 	
-func damage(player_index):
-	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
+func damage():
+	var canon_sprite = cannon.get_node("Sprite2D")
+	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2, canon_sprite, canon_sprite.get_node("Sprite2D2")]
 	$Timer.start()
 	for i in sprite:
 		i.material.set_shader_parameter("opacity", 0.7)
@@ -68,7 +69,8 @@ func damage(player_index):
 		i.material.set_shader_parameter("mix_color", 0.7)
 
 func _on_timer_timeout():
-	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
+	var canon_sprite = cannon.get_node("Sprite2D")
+	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2, canon_sprite, canon_sprite.get_node("Sprite2D2")]
 	for i in sprite:
 		i.material.set_shader_parameter("opacity", 1.0)
 		i.material.set_shader_parameter("mix_color", 0.0)

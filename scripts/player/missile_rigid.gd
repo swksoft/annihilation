@@ -5,6 +5,7 @@ class_name Missile
 # TODO: Que la explosión tenga colores epilépticos XD
 
 @export var explosion_scene: PackedScene = preload("res://scenes/player/explosion_area.tscn")
+var player : Player
 
 func _draw():
 	draw_circle(Vector2.ZERO, 5, Color.BLACK)

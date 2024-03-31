@@ -2,10 +2,8 @@ extends Missile
 
 # TODO: Esto debe desaparecer cuando se sale de la pantalla
 
-@onready var player = get_parent().get_parent()
-
 func explosion():
-	player.position = self.position
+	player.global_position = self.global_position
 	queue_free()
 
 func _draw():
