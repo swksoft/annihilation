@@ -6,6 +6,9 @@ var colors = [Color(1.0, 0.0, 0.0, 1.0),
 		  Color(0.0, 1.0, 0.0, 1.0),
 		  Color(0.0, 0.0, 1.0, 0.0)]
 
+func _ready():
+	get_tree().get_first_node_in_group("camera").apply_shake()
+
 func gor_down():
 	print("Gor Down")
 	var gor_down

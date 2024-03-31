@@ -1,7 +1,6 @@
 extends RigidBody2D
 class_name Missile
 
-# TODO: La pantalla debe vibrar al impactar un misil?
 # TODO: Que la explosión tenga colores epilépticos XD
 
 @export var explosion_scene: PackedScene = preload("res://scenes/player/explosion_area.tscn")
