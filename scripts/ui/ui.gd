@@ -111,9 +111,9 @@ func _on_power_edit_text_changed(new_text):
 func _on_check_button_toggled(toggled_on):
 	var mode
 	if toggled_on:
-		current_player.current_mode = 0
+		current_player.current_mode = Player.MODE.SHOOT_ATTACK
 	else:
-		current_player.current_mode = 1
+		current_player.current_mode = Player.MODE.SHOOT_TP
 
 func _on_level_round_start():
 	await display_message("Round #" + str(TurnManager.round))
