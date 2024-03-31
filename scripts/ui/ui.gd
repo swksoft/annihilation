@@ -92,7 +92,8 @@ func _on_angle_more_button_pressed():
 	current_player.rot += 5
 	%AngleEdit.text = str(current_player.cannon.global_rotation_degrees)#str(current_player.rot)
 func _on_angle_edit_text_changed(new_text):
-	current_player.rot = int(new_text)
+	current_player.rot = float(new_text)
+	%AngleEdit.text = str(float(new_text))
 
 ''' POWER BUTTONS '''
 func _on_power_less_button_pressed():
@@ -101,7 +102,9 @@ func _on_power_less_button_pressed():
 func _on_power_more_button_pressed():
 	power_input.text = str(int(power_input.text) + 10)
 	change_power()
+
 func _on_power_edit_text_changed(new_text):
+	power_input.text = str(int(power_input.text))
 	change_power()
 
 ''' SHOOT MODE '''
