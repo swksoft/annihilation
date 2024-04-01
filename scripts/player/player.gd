@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal change_mode
 signal turn_start
 signal turn_end
+signal change_points
 
 @export_range(-108, 108) var rot = 90
 @export_range(0, 5000) var force: int = 1000 # velocity.x
@@ -22,10 +23,10 @@ var player_points = 0
 func my_turn(is_it):
 	if is_it:
 		$Turn.visible = true
-		print("activate")
+		#print("activate")
 	else:
 		$Turn.visible = false
-		print("deactivate")
+		#print("deactivate")
 
 func _ready():
 	if get_name() == "Player1":
@@ -59,11 +60,16 @@ func attack():
 func get_points(total_points, player_name):
 	print(player_name)
 	if player_name == "Player1":
+		
 		GLOBAL.p1_points += total_points
-		print(GLOBAL.p1_points)
+		
+		#var p1_points = GLOBAL.p1_points
+		#print(GLOBAL.p1_points)
+		emit_signal("change_points")
 	elif player_name == "Player2":
 		GLOBAL.p2_points += total_points
-		print(GLOBAL.p2_points)
+		#print(GLOBAL.p2_points)
+		emit_signal("change_points")
 
 func damage():
 	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]

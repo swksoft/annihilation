@@ -154,6 +154,8 @@ metadata/_edit_lock_ = true
 [connection signal="round_end" from="." to="." method="_on_round_end"]
 [connection signal="round_start" from="." to="UI" method="_on_level_round_start"]
 [connection signal="turn_start" from="." to="UI" method="_on_level_turn_start"]
+[connection signal="change_points" from="Players/Player1" to="UI" method="_on_player_1_change_points"]
+[connection signal="change_points" from="Players/Player2" to="UI" method="_on_player_2_change_points"]
 [connection signal="end_turn" from="UI" to="." method="_on_ui_end_turn"]
 [connection signal="give_up" from="UI" to="." method="_on_ui_give_up"]
 [connection signal="new_wind" from="WindArea" to="UI" method="_on_wind_area_new_wind"]

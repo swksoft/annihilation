@@ -140,7 +140,6 @@ func _on_check_button_toggled(toggled_on):
 
 func _on_level_round_start():
 	await display_message("Round #" + str(TurnManager.round))
-	print("pinga")
 
 func _on_level_game_end():
 	var winner: String = "john"
@@ -160,6 +159,7 @@ func _on_wind_area_new_wind(wind):
 		$CanvasLayer/WindPollo/GridContainer/TextureRect2.flip_h = true
 
 func _on_level_turn_start(player):
+	wind.change_wind()
 	#print_debug(player, " cringe")
 	
 	display_message(str(player.p_name) + "'s turn!")
@@ -187,3 +187,12 @@ func angle_check():
 	if rotation <= 0: %AngleEdit.text = str(0)
 	if rotation >= 180: %AngleEdit.text = str(179)
 	print(float(%AngleEdit.text))
+
+
+func _on_player_1_change_points():
+	%P1PointsLabel.text = str(GLOBAL.p1_points)
+	%P2PointsLabel.text = str(GLOBAL.p2_points)
+	
+func _on_player_2_change_points():
+	%P1PointsLabel.text = str(GLOBAL.p1_points)
+	%P2PointsLabel.text = str(GLOBAL.p2_points)
