@@ -21,11 +21,14 @@ var current_player: Player
 
 @export var power_input : LineEdit
 
+var previous_settings : Dictionary
+
 func disable_all_buttons():
 	get_tree().call_group("Button", "set_disabled", true)
 	get_tree().call_group("Edit", "set_editable", not true)
 
 func _ready():
+	set_previous_settings()
 	''' OBTENER ESCENA DE TODOS LOS PLAYERS '''
 	#current_player = player_data[0]  # TODO: esto debe cambiar
 	#%AngleEdit.text = str(current_player.rot)
@@ -80,10 +83,13 @@ func _on_button_pressed():
 	
 	#current_player.my_turn(true)
 	#print_debug("fire_button")
+	_on_check_button_toggled(%CheckButton.button_pressed)
+	change_power()
 	current_player.attack()
-	
+	var previous_temp = previous_settings
+	set_previous_settings()
 	emit_signal("end_turn")
-	
+	apply_settings(previous_temp)
 	# TODO: Emite una señal al jugador correspondiente
 
 func _on_give_up_button_pressed():
@@ -153,3 +159,15 @@ func _on_level_turn_start(player):
 	#current_player.name = player
 	current_player.my_turn(true)
 	#print(player)
+
+func apply_settings(previous_temp):
+	power_input.text = previous_temp["power"]
+	%CheckButton.button_pressed = previous_temp["mode"]
+	%AngleEdit.text = previous_temp["angle"]
+
+func set_previous_settings():
+	previous_settings = {
+	"power": power_input.text,
+	"mode": %CheckButton.button_pressed,
+	"angle": %AngleEdit.text
+}
