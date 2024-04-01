@@ -16,6 +16,7 @@ var can_shoot = false
 
 @onready var level_data = get_parent().get_parent()
 @onready var cannon = $Cannon
+@onready var point_component: PointController = $point_component
 
 func my_turn(is_it):
 	if is_it:
@@ -53,11 +54,8 @@ func attack():
 	my_turn(false)
 	emit_signal("turn_end")
 	cannon.fire_missile(force, current_mode)
-
-func _on_change_mode():
-	print("pija")
 	
-func damage(player_index):
+func damage():
 	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
 	$Timer.start()
 	for i in sprite:
@@ -72,3 +70,6 @@ func _on_timer_timeout():
 	for i in sprite:
 		i.material.set_shader_parameter("opacity", 1.0)
 		i.material.set_shader_parameter("mix_color", 0.0)
+
+func _on_point_component_point_changed():
+	print("me diste")

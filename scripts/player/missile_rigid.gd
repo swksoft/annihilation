@@ -17,7 +17,7 @@ func _ready():
 func explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = global_position
-	get_parent().get_parent().call_deferred("add_child", explosion)
+	get_parent().call_deferred("add_child", explosion)
 	queue_free()
 	
 func _on_body_entered(body):

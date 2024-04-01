@@ -12,3 +12,4 @@ func change_wind():
 
 func _ready():
 	change_wind()
+	# FIXME: Viento no cambia XD

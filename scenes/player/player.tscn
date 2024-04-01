@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2dudxcs57rmj"]
+[gd_scene load_steps=17 format=3 uid="uid://d2dudxcs57rmj"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ijle7"]
 [ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_noldq"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://jpkerpporx18" path="res://assets/sprites/arrow/arrowani1.png" id="6_7y4nl"]
 [ext_resource type="Texture2D" uid="uid://df3rjt70465ap" path="res://assets/sprites/arrow/arrowani2.png" id="7_cd0wa"]
 [ext_resource type="Texture2D" uid="uid://dxh7irnipt2wb" path="res://assets/sprites/arrow/arrowani4.png" id="8_5b56u"]
+[ext_resource type="PackedScene" uid="uid://d11rxqxw1rd8a" path="res://componentes/point_component.tscn" id="10_nm6sw"]
+[ext_resource type="PackedScene" uid="uid://26bc4feis0mt" path="res://componentes/hurtbox_component.tscn" id="10_vtw3j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qcfgv"]
 shader = ExtResource("1_noldq")
@@ -16,6 +18,9 @@ shader_parameter/r = 0.0
 shader_parameter/g = null
 shader_parameter/b = null
 shader_parameter/mix_color = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_na72s"]
+radius = 17.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xfkf1"]
 atlas = ExtResource("2_nib68")
@@ -48,6 +53,13 @@ animations = [{
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 material = SubResource("ShaderMaterial_qcfgv")
 script = ExtResource("1_ijle7")
+
+[node name="point_component" parent="." instance=ExtResource("10_nm6sw")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("10_vtw3j")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_na72s")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 material = ExtResource("3_70yg6")
@@ -91,4 +103,5 @@ animation = &"my_turn"
 autoplay = "my_turn"
 frame_progress = 0.323753
 
+[connection signal="point_changed" from="point_component" to="." method="_on_point_component_point_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -132,7 +132,7 @@ func _on_level_game_end():
 	display_message("El ganador es: " + winner + "!!")
 
 func _on_wind_bar_value_changed(value):
-	print_debug("VIENTO FRESCO: ", wind.wind_intensity)
+	#print_debug("VIENTO FRESCO: ", wind.wind_intensity)
 	value = wind.wind_intensity
 
 func _on_wind_area_new_wind(wind):

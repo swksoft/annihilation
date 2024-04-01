@@ -11,7 +11,7 @@
 script = ExtResource("1_c0efh")
 
 [node name="Level00" parent="." instance=ExtResource("1_ro0kk")]
-position = Vector2(255, 42)
+position = Vector2(255, 208)
 
 [node name="Polygon2D" parent="Level00" index="0"]
 polygon = PackedVector2Array(-257, 48, -253, 384, 25, 300, 143, 295, 195, 277, 218, 249, 234, 255, 245, 271, 268, 259, 290, 239, 322, 229, 334, 191, 310, 184, 263, 156, 328, 168, 373, 223, 370, 118, 421, 176, 485, 160, 444, 206, 426, 231, 427, 248, 449, 235, 480, 233, 484, 269, 484, 272, 513, 273, 515, 282, 528, 298, 568, 295, 633, 309, 1022.66, 384.148, 1026, 53, 1052, 815, -316, 820)
@@ -20,18 +20,19 @@ polygon = PackedVector2Array(-257, 48, -253, 384, 25, 300, 143, 295, 195, 277, 2
 position = Vector2(948, -178)
 
 [node name="Polygon2D" parent="Level01" index="0"]
-polygon = PackedVector2Array(-924, 49, -1110, 353, -548, 134, 54, 304, 278, 309, 444, 333, 768, 144)
+polygon = PackedVector2Array(-799, 545, -582, 526, -631, 485, -555, 430, -273, 418, -619, 408, -706, 470, -649, 508)
 
 [node name="Players" type="Node" parent="."]
 
 [node name="Player1" parent="Players" instance=ExtResource("2_clir6")]
 process_mode = 1
-position = Vector2(167, 361)
+position = Vector2(744, 406)
+player_index = 1
 metadata/_edit_group_ = true
 
 [node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
-position = Vector2(408, 281)
-player_index = 1
+position = Vector2(993, 475)
+player_index = 2
 
 [node name="UI" parent="." instance=ExtResource("4_ykgrc")]
 metadata/_edit_vertical_guides_ = [640.0, 320.0]
@@ -43,7 +44,8 @@ anchor_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="MissileRigid" parent="." instance=ExtResource("6_jjw18")]
-position = Vector2(325, 339)
+position = Vector2(340, 268)
+metadata/_edit_group_ = true
 
 [connection signal="game_end" from="." to="." method="_on_game_end"]
 [connection signal="game_end" from="." to="UI" method="_on_level_game_end"]
@@ -58,4 +60,3 @@ position = Vector2(325, 339)
 [editable path="Level00"]
 [editable path="Level01"]
 [editable path="Players/Player1"]
-[editable path="MissileRigid"]
