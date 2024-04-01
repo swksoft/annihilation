@@ -1,11 +1,54 @@
-[gd_scene load_steps=7 format=3 uid="uid://csrihit1rg1d4"]
+[gd_scene load_steps=13 format=3 uid="uid://csrihit1rg1d4"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_c0efh"]
 [ext_resource type="PackedScene" uid="uid://b2r6e10mj78og" path="res://scenes/map/level_00.tscn" id="1_ro0kk"]
 [ext_resource type="PackedScene" uid="uid://d2dudxcs57rmj" path="res://scenes/player/player.tscn" id="2_clir6"]
+[ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="4_sxqat"]
 [ext_resource type="PackedScene" uid="uid://d2mo75fmsvcfr" path="res://scenes/hud/ui.tscn" id="4_ykgrc"]
+[ext_resource type="PackedScene" uid="uid://b3800x0cxnd06" path="res://scenes/camera_2d.tscn" id="6_1oqnx"]
 [ext_resource type="PackedScene" uid="uid://frtn2ew3dpew" path="res://scenes/player/missile_rigid.tscn" id="6_jjw18"]
 [ext_resource type="PackedScene" uid="uid://b7q158bi38r2u" path="res://scenes/map/wind_area.tscn" id="7_leu7k"]
+
+[sub_resource type="Shader" id="Shader_157m4"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float opacity;
+uniform float r;
+uniform float g;
+uniform float b;
+uniform float mix_color;
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	if (texture_color.a != 0.0)
+		COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
+}
+
+void light(){
+	float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+	LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18wu5"]
+resource_local_to_scene = true
+shader = SubResource("Shader_157m4")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 1.0
+shader_parameter/mix_color = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yh4a"]
+resource_local_to_scene = true
+atlas = ExtResource("4_sxqat")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uet12"]
+resource_local_to_scene = true
+atlas = ExtResource("4_sxqat")
+region = Rect2(32, 0, 32, 32)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_c0efh")
@@ -30,6 +73,18 @@ position = Vector2(744, 406)
 player_index = 1
 metadata/_edit_group_ = true
 
+[node name="Sprite2D3" parent="Players/Player1" index="0"]
+material = SubResource("ShaderMaterial_18wu5")
+texture = SubResource("AtlasTexture_6yh4a")
+
+[node name="Sprite2D" parent="Players/Player1" index="1"]
+material = SubResource("ShaderMaterial_18wu5")
+texture = SubResource("AtlasTexture_uet12")
+
+[node name="Sprite2D2" parent="Players/Player1" index="2"]
+material = SubResource("ShaderMaterial_18wu5")
+texture = SubResource("AtlasTexture_6yh4a")
+
 [node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
 position = Vector2(993, 475)
 player_index = 2
@@ -37,8 +92,7 @@ player_index = 2
 [node name="UI" parent="." instance=ExtResource("4_ykgrc")]
 metadata/_edit_vertical_guides_ = [640.0, 320.0]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="Camera2D" parent="." instance=ExtResource("6_1oqnx")]
 
 [node name="WindArea" parent="." instance=ExtResource("7_leu7k")]
 metadata/_edit_lock_ = true

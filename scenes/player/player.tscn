@@ -23,10 +23,12 @@ shader_parameter/mix_color = null
 radius = 17.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xfkf1"]
+resource_local_to_scene = true
 atlas = ExtResource("2_nib68")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfrlg"]
+resource_local_to_scene = true
 atlas = ExtResource("2_nib68")
 region = Rect2(32, 0, 32, 32)
 
