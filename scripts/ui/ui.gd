@@ -165,9 +165,7 @@ func apply_settings(previous_temp):
 	%AngleEdit.text = previous_temp["angle"]
 
 func set_previous_settings():
-	
 	previous_settings = {
-<<<<<<< HEAD
 	"power": power_input.text,
 	"mode": %CheckButton.button_pressed,
 	"angle": %AngleEdit.text
@@ -178,9 +176,3 @@ func angle_check():
 	if rotation <= 0: %AngleEdit.text = str(0)
 	if rotation >= 180: %AngleEdit.text = str(179)
 	print(float(%AngleEdit.text))
-=======
-		"power": power_input.text,
-		"mode": %CheckButton.button_pressed,
-		"angle": %AngleEdit.text
-	}
->>>>>>> refs/remotes/origin/main
