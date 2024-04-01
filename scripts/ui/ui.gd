@@ -4,8 +4,6 @@ extends Control
 # TODO: Capturar pantalla al momento de disparar y al momento de impacto con get_viewport().queue_screen_capture()
 # TODO: Agregar limites para los lineedit
 
-# FIXME: Oh, cáspita! Los grados se pasan, fijate que los grados no pasen del rango -195 al 18
-
 signal give_up
 signal change_mode
 signal end_turn
@@ -89,7 +87,6 @@ func change_power():
 	
 
 func _on_button_pressed():
-	# TODO: fire_button debe chequear que esté todo en orden
 	
 	#current_player.my_turn(true)
 	#print_debug("fire_button")
@@ -109,15 +106,17 @@ func _on_give_up_button_pressed():
 ''' ANGLE BUTTONS '''
 func _on_angle_less_button_pressed():
 	#print_debug("increase_angle")
-	current_player.rot -= 5
-	%AngleEdit.text = str(current_player.cannon.global_rotation_degrees)
+	%AngleEdit.text = str(current_player.cannon.global_rotation_degrees - 5)
+	angle_check()
+	current_player.rot = float(%AngleEdit.text)
 func _on_angle_more_button_pressed():
 	#print_debug("decrease_angle")
-	current_player.rot += 5
-	%AngleEdit.text = str(current_player.cannon.global_rotation_degrees)#str(current_player.rot)
+	%AngleEdit.text = str(current_player.cannon.global_rotation_degrees + 5)
+	angle_check()
+	current_player.rot = float(%AngleEdit.text)
 func _on_angle_edit_text_changed(new_text):
-	current_player.rot = float(new_text)
-	%AngleEdit.text = str(float(new_text))
+	angle_check()
+	current_player.rot = float(%AngleEdit.text)
 
 ''' POWER BUTTONS '''
 func _on_power_less_button_pressed():
@@ -177,9 +176,14 @@ func apply_settings(previous_temp):
 	%AngleEdit.text = previous_temp["angle"]
 
 func set_previous_settings():
-	
 	previous_settings = {
-		"power": power_input.text,
-		"mode": %CheckButton.button_pressed,
-		"angle": %AngleEdit.text
-	}
+	"power": power_input.text,
+	"mode": %CheckButton.button_pressed,
+	"angle": %AngleEdit.text
+}
+
+func angle_check():
+	var rotation = float(%AngleEdit.text)
+	if rotation <= 0: %AngleEdit.text = str(0)
+	if rotation >= 180: %AngleEdit.text = str(179)
+	print(float(%AngleEdit.text))
