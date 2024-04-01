@@ -13,7 +13,6 @@ func _on_area_entered(area: Area2D):
 		#print(area)
 		#return
 		var player = area.get_parent()
-		
 		''' Cálculo choto de puntos '''
 		var points = 500
 		var x1 = area.global_position.x
@@ -22,6 +21,7 @@ func _on_area_entered(area: Area2D):
 		var y2 = self.position.y
 		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
 		var total_points = points * (points / point_modifier)
+		if self.get_parent().get_instance_id() == player.get_instance_id(): total_points = -total_points
 		#player.player_index
 		#player.damage()
 		player.get_points(total_points, player.get_name())
