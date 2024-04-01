@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://d2dudxcs57rmj"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ijle7"]
+[ext_resource type="Shader" path="res://scenes/player/shader/hurt.gdshader" id="1_noldq"]
+[ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="2_nib68"]
+[ext_resource type="PackedScene" uid="uid://navi25jvosua" path="res://scenes/player/cannon.tscn" id="3_6ia0s"]
+[ext_resource type="Material" uid="uid://1r6o31ib20nh" path="res://scenes/player/shader/hurt.tres" id="3_70yg6"]
+[ext_resource type="Texture2D" uid="uid://jpkerpporx18" path="res://assets/sprites/arrow/arrowani1.png" id="6_7y4nl"]
+[ext_resource type="Texture2D" uid="uid://df3rjt70465ap" path="res://assets/sprites/arrow/arrowani2.png" id="7_cd0wa"]
+[ext_resource type="Texture2D" uid="uid://dxh7irnipt2wb" path="res://assets/sprites/arrow/arrowani4.png" id="8_5b56u"]
+[ext_resource type="PackedScene" uid="uid://d11rxqxw1rd8a" path="res://componentes/point_component.tscn" id="10_nm6sw"]
+[ext_resource type="PackedScene" uid="uid://26bc4feis0mt" path="res://componentes/hurtbox_component.tscn" id="10_vtw3j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qcfgv"]
+shader = ExtResource("1_noldq")
+shader_parameter/opacity = null
+shader_parameter/r = 0.0
+shader_parameter/g = null
+shader_parameter/b = null
+shader_parameter/mix_color = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_na72s"]
+radius = 17.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfkf1"]
+resource_local_to_scene = true
+atlas = ExtResource("2_nib68")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfrlg"]
+resource_local_to_scene = true
+atlas = ExtResource("2_nib68")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4ai"]
+size = Vector2(34, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3olc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7y4nl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cd0wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5b56u")
+}],
+"loop": true,
+"name": &"my_turn",
+"speed": 8.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+material = SubResource("ShaderMaterial_qcfgv")
+script = ExtResource("1_ijle7")
+
+[node name="point_component" parent="." instance=ExtResource("10_nm6sw")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("10_vtw3j")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_na72s")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
+position = Vector2(9, 0)
+texture = SubResource("AtlasTexture_xfkf1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
+texture = SubResource("AtlasTexture_nfrlg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = ExtResource("3_70yg6")
+position = Vector2(-9, 0)
+texture = SubResource("AtlasTexture_xfkf1")
+
+[node name="Cannon" parent="." groups=["cannon"] instance=ExtResource("3_6ia0s")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_8p4ai")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="PlayerName" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -52.0
+offset_right = 25.0
+offset_bottom = -29.0
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Turn" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-13, -74)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_e3olc")
+animation = &"my_turn"
+autoplay = "my_turn"
+frame_progress = 0.323753
+
+[connection signal="point_changed" from="point_component" to="." method="_on_point_component_point_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

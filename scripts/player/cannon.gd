@@ -26,7 +26,6 @@ func fire_missile(force, current_mode):
 	var direction = Vector2(cos(marker.global_rotation), sin(marker.global_rotation))
 	missile_rigid.linear_velocity = power * direction
 
-	#TODO: XD
 	get_parent().add_child(missile_rigid)
 	missile_rigid.player = get_parent()
-	get_parent().get_parent().add_child(missile_rigid)
+	#get_parent().get_parent().add_child(missile_rigid)

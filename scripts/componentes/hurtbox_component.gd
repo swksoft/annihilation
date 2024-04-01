@@ -20,7 +20,8 @@ func _on_area_entered(area: Area2D):
 		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
 		var total_points = points / (point_modifier / 100)
 		#player.player_index
-		#player.damage()
+		player.damage()
+		
 		#print(total_points)
-		print_debug("PLASHER: ", player.player_index)
+		#print_debug("PLASHER: ", player)
 		

@@ -166,8 +166,9 @@ func apply_settings(previous_temp):
 	%AngleEdit.text = previous_temp["angle"]
 
 func set_previous_settings():
+	
 	previous_settings = {
-	"power": power_input.text,
-	"mode": %CheckButton.button_pressed,
-	"angle": %AngleEdit.text
-}
+		"power": power_input.text,
+		"mode": %CheckButton.button_pressed,
+		"angle": %AngleEdit.text
+	}
