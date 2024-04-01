@@ -17,6 +17,9 @@ func _ready():
 func fire_missile(force, current_mode):
 	var missile_rigid : Missile
 	
+	if power > 1500: power = 1500
+	if power < 0: power = 0
+	
 	match current_mode:
 		Player.MODE.SHOOT_ATTACK:
 			missile_rigid = missile_rigid_scene.instantiate() as Missile
