@@ -109,7 +109,7 @@ polygon = PackedVector2Array(-799, 545, -582, 526, -631, 485, -555, 430, -273, 4
 
 [node name="Player1" parent="Players" instance=ExtResource("2_clir6")]
 process_mode = 1
-position = Vector2(744, 406)
+position = Vector2(199, 331)
 player_index = 1
 metadata/_edit_group_ = true
 
@@ -126,8 +126,9 @@ material = SubResource("ShaderMaterial_18wu5")
 texture = SubResource("AtlasTexture_6yh4a")
 
 [node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
-position = Vector2(993, 475)
+position = Vector2(818, 483)
 player_index = 2
+metadata/_edit_group_ = true
 
 [node name="Sprite2D3" parent="Players/Player2" index="2"]
 material = SubResource("ShaderMaterial_fjrma")
