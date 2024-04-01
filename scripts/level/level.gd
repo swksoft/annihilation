@@ -45,10 +45,10 @@ func next_round():
 
 ''' 4) Start Player Turn'''
 func next_turn():
-	is_battling = true
+	TurnManager.during_turn = true
 	
 	if current_turn < turn_order.size():
-		print("\nTurno de, ", current_turn)
+		print("\nTurno de, ", turn_order[current_turn])
 		emit_signal("turn_start", turn_order[current_turn]) # Manda señal a hud
 		return
 	
@@ -70,18 +70,6 @@ func _on_game_end():
 func _on_round_end():
 	# Es llamada luego de que ambos jugadores llamen a "turn_ended"
 	next_round()
-
-func _on_player_1_turn_end():
-	if ready_both:
-		emit_signal("round_end")
-	else:
-		next_turn()
-		
-func _on_player_2_turn_end():
-	if ready_both:
-		emit_signal("round_end")
-	else:
-		next_turn()
 
 func _on_ui_give_up():
 	emit_signal("game_end")

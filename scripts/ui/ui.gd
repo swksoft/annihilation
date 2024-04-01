@@ -10,6 +10,8 @@ signal give_up
 signal change_mode
 signal end_turn
 
+var can_shoot: bool
+
 @export var screen_message: PackedScene = preload("res://scenes/hud/screen_message.tscn")
 
 var deactivate_controls: bool = false
@@ -57,10 +59,18 @@ func display_message(text: String):
 	add_child(message)
 
 func _process(delta):
+	if !can_shoot:
+		if TurnManager.during_turn:
+			return
+		else:
+			emit_signal("end_turn")
+		return
+	
 	# TODO: Quiero que todos los botones se muestren presionados cuando se realiza un input del teclado (jugo)
 	if Input.is_action_just_pressed("fire"):
 		# TODO: desactivar boton hasta siguiente ronda
 		#%Button.button_pressed = true
+		can_shoot = false
 		_on_button_pressed()
 	elif Input.is_action_just_pressed("give_up"): _on_give_up_button_pressed()
 	elif Input.is_action_pressed("inc_angle"): _on_angle_less_button_pressed()
@@ -88,7 +98,7 @@ func _on_button_pressed():
 	current_player.attack()
 	var previous_temp = previous_settings
 	set_previous_settings()
-	emit_signal("end_turn")
+	
 	apply_settings(previous_temp)
 	# TODO: Emite una señal al jugador correspondiente
 
@@ -153,11 +163,12 @@ func _on_wind_area_new_wind(wind):
 func _on_level_turn_start(player):
 	#print_debug(player, " cringe")
 	
-	display_message(str(player.name) + "'s turn!")
+	display_message(str(player.p_name) + "'s turn!")
 	#player.my_turn(true)
 	current_player = player
-	#current_player.name = player
+	current_player.p_name = player
 	current_player.my_turn(true)
+	can_shoot = true
 	#print(player)
 
 func apply_settings(previous_temp):

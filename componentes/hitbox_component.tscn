@@ -3,5 +3,4 @@
 [ext_resource type="Script" path="res://componentes/hitbox_component.gd" id="1_8f4vi"]
 
 [node name="HitboxComponent" type="Area2D"]
-collision_mask = 0
 script = ExtResource("1_8f4vi")

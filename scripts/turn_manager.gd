@@ -4,6 +4,7 @@ var round = 0
 var max_round = 5
 var current_turn: Object
 var turn_order = []
+var during_turn: bool
 
 func reorganize_turns(player_list, current_turn):
 	var index = player_list.find(current_turn)

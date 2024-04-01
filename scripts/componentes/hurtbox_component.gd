@@ -8,7 +8,10 @@ class_name HurtboxComponent
 #var floating_text_scene: PackedScene = preload("res://scenes/UI/floating_text.tscn")
 
 func _on_area_entered(area: Area2D):
+	
 	if area is HitboxComponent:
+		#print(area)
+		#return
 		var player = area.get_parent()
 		
 		''' Cálculo choto de puntos '''
@@ -18,9 +21,10 @@ func _on_area_entered(area: Area2D):
 		var x2 = self.position.x
 		var y2 = self.position.y
 		var point_modifier = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
-		var total_points = points / (point_modifier / 100)
+		var total_points = points * (points / point_modifier)
 		#player.player_index
-		player.damage()
+		#player.damage()
+		player.get_points(total_points, player.get_name())
 		
 		#print(total_points)
 		#print_debug("PLASHER: ", player)

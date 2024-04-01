@@ -13,6 +13,7 @@ enum MODE{SHOOT_ATTACK, SHOOT_TP}
 var current_mode = MODE.SHOOT_ATTACK
 var p_name
 var can_shoot = false
+var player_points = 0
 
 @onready var level_data = get_parent().get_parent()
 @onready var cannon = $Cannon
@@ -54,7 +55,16 @@ func attack():
 	my_turn(false)
 	emit_signal("turn_end")
 	cannon.fire_missile(force, current_mode)
-	
+
+func get_points(total_points, player_name):
+	print(player_name)
+	if player_name == "Player1":
+		GLOBAL.p1_points += total_points
+		print(GLOBAL.p1_points)
+	elif player_name == "Player2":
+		GLOBAL.p2_points += total_points
+		print(GLOBAL.p2_points)
+
 func damage():
 	var sprite = [$Sprite2D3, $Sprite2D, $Sprite2D2]
 	var canon_sprite = cannon.get_node("Sprite2D")
