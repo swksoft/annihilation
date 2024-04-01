@@ -91,21 +91,24 @@ layout_mode = 2
 
 [node name="Company" type="Label" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "SwkSoft presents..."
 
 [node name="Title" type="Label" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 60
 text = "ANNHILATION: ULTIMATE SHOWDOWN
 "
 horizontal_alignment = 1
 
 [node name="SubTitle" type="Label" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Obliterate for the Sake of Justice! :D"
 horizontal_alignment = 1
 
 [node name="BoxContainer2" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -118,18 +121,25 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+vertical = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Play" type="Button" parent="BoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
+size_flags_vertical = 3
 text = "Play"
 
 [node name="Exit" type="Button" parent="BoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
+size_flags_vertical = 3
 text = "Exit"
 
 [node name="Version" type="Label" parent="."]

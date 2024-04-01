@@ -28,6 +28,7 @@ func disable_all_buttons():
 	get_tree().call_group("Edit", "set_editable", not true)
 
 func _ready():
+	
 	set_previous_settings()
 	''' OBTENER ESCENA DE TODOS LOS PLAYERS '''
 	#current_player = player_data[0]  # TODO: esto debe cambiar
@@ -43,8 +44,8 @@ func _ready():
 	# TODO: Quitar/Brindar acceso a controles
 	# TODO: Cargar Nombres
 	# TODO: CheckButton debe estar siempre activado al inicio de ronda
-	#%P1Name.text = GLOBAL.p1_name
-	#%P2Name.text = GLOBAL.p2_name
+	%P1Name.text = GLOBAL.p1_name
+	%P2Name.text = GLOBAL.p2_name
 	#get_tree().call_group("Button", "set_disabled", true)
 	#get_tree().call_group("Edit", "set_editable", not true)
 	
@@ -142,8 +143,16 @@ func _on_level_round_start():
 	await display_message("Round #" + str(TurnManager.round))
 
 func _on_level_game_end():
-	var winner: String = "john"
-	display_message("El ganador es: " + winner + "!!")
+	if GLOBAL.p1_points == GLOBAL.p2_points:
+		display_message("Draw!!")
+	if GLOBAL.p1_points > GLOBAL.p2_points:
+		display_message("And the winner is... " + GLOBAL.p1_name + "!!")
+	elif GLOBAL.p2_points > GLOBAL.p1_points:
+		display_message("And the winner is... " + GLOBAL.p2_name + "!!")
+	
+	await get_tree().create_timer(3.0).timeout
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/hud/main_menu.tscn")
+	
 
 func _on_wind_bar_value_changed(value):
 	#print_debug("VIENTO FRESCO: ", wind.wind_intensity)

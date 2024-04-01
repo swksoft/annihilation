@@ -149,7 +149,6 @@ metadata/_edit_vertical_guides_ = [640.0, 320.0]
 [node name="WindArea" parent="." instance=ExtResource("7_leu7k")]
 metadata/_edit_lock_ = true
 
-[connection signal="game_end" from="." to="." method="_on_game_end"]
 [connection signal="game_end" from="." to="UI" method="_on_level_game_end"]
 [connection signal="round_end" from="." to="." method="_on_round_end"]
 [connection signal="round_start" from="." to="UI" method="_on_level_round_start"]

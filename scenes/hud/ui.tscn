@@ -477,7 +477,7 @@ horizontal_alignment = 1
 [node name="P1PointsLabel" type="Label" parent="CanvasLayer/MainUI/HBoxContainer/HBoxData/VBoxPlayer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "000000 pts"
+text = "0 pts"
 
 [node name="P2Container" type="PanelContainer" parent="CanvasLayer/MainUI/HBoxContainer/HBoxData/VBoxPlayer/GridContainer"]
 layout_mode = 2
@@ -492,7 +492,7 @@ horizontal_alignment = 1
 [node name="P2PointsLabel" type="Label" parent="CanvasLayer/MainUI/HBoxContainer/HBoxData/VBoxPlayer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "000000 pts"
+text = "0 pts"
 
 [node name="ControlsContainer" type="PanelContainer" parent="CanvasLayer/MainUI/HBoxContainer"]
 custom_minimum_size = Vector2(634, 0)
