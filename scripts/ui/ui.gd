@@ -67,9 +67,7 @@ func _process(delta):
 	
 	# TODO: Quiero que todos los botones se muestren presionados cuando se realiza un input del teclado (jugo)
 	if Input.is_action_just_pressed("fire"):
-		# TODO: desactivar boton hasta siguiente ronda
 		#%Button.button_pressed = true
-		can_shoot = false
 		_on_button_pressed()
 	elif Input.is_action_just_pressed("give_up"): _on_give_up_button_pressed()
 	elif Input.is_action_pressed("inc_angle"): _on_angle_less_button_pressed()
@@ -88,7 +86,8 @@ func change_power():
 	
 
 func _on_button_pressed():
-	
+	if !can_shoot: return
+	can_shoot = false
 	#current_player.my_turn(true)
 	#print_debug("fire_button")
 	_on_check_button_toggled(%CheckButton.button_pressed)
