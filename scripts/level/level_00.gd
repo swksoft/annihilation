@@ -13,9 +13,17 @@ func clip(poly):
 	
 	var new_values = []
 	for point in poly.polygon:
-		new_values.append(point+poly.position)
+		new_values.append(point+poly.global_position)
 		offset_poly.polygon = PackedVector2Array(new_values)
 		var res = Geometry2D.clip_polygons(polygon.polygon, offset_poly.polygon)
 		
 		polygon.polygon = res[0]
 		polygon.set_deferred("polygon", res[0])
+
+		collision.call_deferred("set_polygon", res[0])
+		#collision.set_polygon(res[0])
+		
+		
+		
+		polygon.set_deferred("polygon", res[0])
+		#collision.set_deferred("polygon", res[0])

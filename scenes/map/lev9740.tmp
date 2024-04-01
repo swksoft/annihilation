@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://csrihit1rg1d4"]
+[gd_scene load_steps=13 format=3 uid="uid://csrihit1rg1d4"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_c0efh"]
 [ext_resource type="PackedScene" uid="uid://b2r6e10mj78og" path="res://scenes/map/level_00.tscn" id="1_ro0kk"]
@@ -50,47 +50,6 @@ resource_local_to_scene = true
 atlas = ExtResource("4_sxqat")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="Shader" id="Shader_n73e2"]
-resource_local_to_scene = true
-code = "shader_type canvas_item;
-uniform float opacity;
-uniform float r;
-uniform float g;
-uniform float b;
-uniform float mix_color;
-
-void fragment() {
-	vec4 texture_color = texture(TEXTURE, UV);
-	if (texture_color.a != 0.0)
-		COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
-}
-
-void light(){
-	float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
-	LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
-}
-
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjrma"]
-resource_local_to_scene = true
-shader = SubResource("Shader_n73e2")
-shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 1.0
-shader_parameter/b = 1.0
-shader_parameter/mix_color = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8n4f2"]
-resource_local_to_scene = true
-atlas = ExtResource("4_sxqat")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5skdm"]
-resource_local_to_scene = true
-atlas = ExtResource("4_sxqat")
-region = Rect2(32, 0, 32, 32)
-
 [node name="Level" type="Node2D"]
 script = ExtResource("1_c0efh")
 
@@ -130,19 +89,8 @@ texture = SubResource("AtlasTexture_6yh4a")
 position = Vector2(993, 475)
 player_index = 2
 
-[node name="Sprite2D3" parent="Players/Player2" index="2"]
-material = SubResource("ShaderMaterial_fjrma")
-texture = SubResource("AtlasTexture_8n4f2")
-
-[node name="Sprite2D" parent="Players/Player2" index="3"]
-material = SubResource("ShaderMaterial_fjrma")
-texture = SubResource("AtlasTexture_5skdm")
-
-[node name="Sprite2D2" parent="Players/Player2" index="4"]
-material = SubResource("ShaderMaterial_fjrma")
-texture = SubResource("AtlasTexture_8n4f2")
-
 [node name="UI" parent="." instance=ExtResource("4_ykgrc")]
+power_input = null
 metadata/_edit_vertical_guides_ = [640.0, 320.0]
 
 [node name="Camera2D" parent="." instance=ExtResource("6_1oqnx")]
@@ -164,4 +112,3 @@ metadata/_edit_group_ = true
 [editable path="Level00"]
 [editable path="Level01"]
 [editable path="Players/Player1"]
-[editable path="Players/Player2"]

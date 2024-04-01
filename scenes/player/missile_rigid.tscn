@@ -13,6 +13,7 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdj5a"]
 
 [node name="MissileRigid" type="RigidBody2D"]
+top_level = true
 mass = 10.0
 gravity_scale = 0.75
 script = ExtResource("1_pk4gg")
