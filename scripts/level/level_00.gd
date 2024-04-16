@@ -8,8 +8,9 @@ func _ready():
 	collision.set_polygon(polygon_points)
 
 func clip(poly):
+	print("a")
 	var offset_poly = Polygon2D.new()
-	offset_poly.global_position = Vector2.ZERO
+	#offset_poly.global_position = Vector2.ZERO
 	
 	var new_values = []
 	for point in poly.polygon:
@@ -21,9 +22,8 @@ func clip(poly):
 		polygon.set_deferred("polygon", res[0])
 
 		collision.call_deferred("set_polygon", res[0])
-		#collision.set_polygon(res[0])
 		
-		
+		#collision.call_deferred("set_polygon", res[0])
 		
 		polygon.set_deferred("polygon", res[0])
-		#collision.set_deferred("polygon", res[0])
+		collision.set_deferred("polygon", res[0])

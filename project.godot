@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="annihilation"
-run/main_scene="res://scenes/hud/main_menu.tscn"
+run/main_scene="res://scenes/map/level.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="annihilation"
 config/features=PackedStringArray("4.2", "GL Compatibility")
