@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://dxh6kf7713fle"
+path="res://.godot/imported/texture_sword.png-b5d6a51f135400de887324c4c6a02d5c.image"
+
+[deps]
+
+source_file="res://assets/textures/texture_sword.png"
+dest_files=["res://.godot/imported/texture_sword.png-b5d6a51f135400de887324c4c6a02d5c.image"]
+
+[params]
+

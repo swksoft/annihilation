@@ -4,6 +4,7 @@ extends HitboxComponent
 #@export var point_component : PointController
 @export var hitbox_component: HitboxComponent
 @export var hurtbox_component: HurtboxComponent
+@onready var destruction_polygon = $AreaDestruction/DestructionPolygon
 
 var colors = [Color(1.0, 0.0, 0.0, 1.0),
 		  Color(0.0, 1.0, 0.0, 1.0),
@@ -11,6 +12,7 @@ var colors = [Color(1.0, 0.0, 0.0, 1.0),
 
 func _ready():
 	get_tree().get_first_node_in_group("camera").apply_shake()
+	#destruction_polygon.global_transform
 
 func _on_area_entered(area):
 	print_debug("FUNCIONA")

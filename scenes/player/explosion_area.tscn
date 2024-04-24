@@ -80,7 +80,7 @@ texture = ExtResource("3_vgees")
 [node name="AreaDestruction" type="Area2D" parent="."]
 
 [node name="DestructionPolygon" type="CollisionPolygon2D" parent="AreaDestruction"]
-polygon = PackedVector2Array(0, -80, -56, -56, -80, 0, -56, 56, 0, 80, 56, 56, 80, 0, 56, -56)
+polygon = PackedVector2Array(0, -64, -32, -56, -48, -40, -56, -24, -62, 0, -56, 24, -48, 40, -32, 56, 0, 64, 32, 56, 48, 40, 56, 24, 62, 0, 56, -24, 48, -40, 32, -56)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="AreaDestruction" to="." method="_on_area_destruction_body_entered"]

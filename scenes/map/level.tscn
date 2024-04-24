@@ -1,12 +1,38 @@
-[gd_scene load_steps=16 format=3 uid="uid://csrihit1rg1d4"]
+[gd_scene load_steps=23 format=3 uid="uid://csrihit1rg1d4"]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_c0efh"]
 [ext_resource type="PackedScene" uid="uid://b2r6e10mj78og" path="res://scenes/map/level_00.tscn" id="1_ro0kk"]
 [ext_resource type="PackedScene" uid="uid://d2dudxcs57rmj" path="res://scenes/player/player.tscn" id="2_clir6"]
+[ext_resource type="Shader" path="res://assets/shaders/clouds.gdshader" id="2_vpfe8"]
+[ext_resource type="Texture2D" uid="uid://d15e3uxdm1pu7" path="res://icon.svg" id="2_wk7rq"]
 [ext_resource type="Texture2D" uid="uid://cvif1yup0kwys" path="res://assets/sprites/tanques_packed.png" id="4_sxqat"]
 [ext_resource type="PackedScene" uid="uid://d2mo75fmsvcfr" path="res://scenes/hud/ui.tscn" id="4_ykgrc"]
 [ext_resource type="PackedScene" uid="uid://b3800x0cxnd06" path="res://scenes/camera_2d.tscn" id="6_1oqnx"]
 [ext_resource type="PackedScene" uid="uid://b7q158bi38r2u" path="res://scenes/map/wind_area.tscn" id="7_leu7k"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_076po"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pthw1"]
+seamless = true
+noise = SubResource("FastNoiseLite_076po")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lrkue"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1givn"]
+seamless = true
+noise = SubResource("FastNoiseLite_lrkue")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47c4l"]
+shader = ExtResource("2_vpfe8")
+shader_parameter/scroll1 = Vector2(0.02, 0.02)
+shader_parameter/scroll2 = Vector2(0.02, 0.02)
+shader_parameter/distortion_strenght = 0.2
+shader_parameter/tone_color = Color(0.503745, 0.849754, 0.850066, 0.933333)
+shader_parameter/top_color = Color(0.514566, 0.514565, 0.514565, 0.411765)
+shader_parameter/light_start = 0.275
+shader_parameter/light_end = 0.4
+shader_parameter/noise1 = SubResource("NoiseTexture2D_pthw1")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_1givn")
 
 [sub_resource type="Shader" id="Shader_157m4"]
 resource_local_to_scene = true
@@ -93,6 +119,12 @@ region = Rect2(32, 0, 32, 32)
 [node name="Level" type="Node2D"]
 script = ExtResource("1_c0efh")
 
+[node name="Clouds" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_47c4l")
+position = Vector2(1383, -112)
+scale = Vector2(14.1934, 14.1934)
+texture = ExtResource("2_wk7rq")
+
 [node name="Level00" parent="." instance=ExtResource("1_ro0kk")]
 
 [node name="Polygon2D" parent="Level00" index="0"]
@@ -102,7 +134,7 @@ polygon = PackedVector2Array(-280, 383, -253, 384, 25, 300, 143, 295, 195, 277, 
 
 [node name="Player1" parent="Players" instance=ExtResource("2_clir6")]
 process_mode = 1
-position = Vector2(173, 225)
+position = Vector2(-7, 276)
 player_index = 1
 metadata/_edit_group_ = true
 
@@ -119,7 +151,7 @@ material = SubResource("ShaderMaterial_18wu5")
 texture = SubResource("AtlasTexture_6yh4a")
 
 [node name="Player2" parent="Players" instance=ExtResource("2_clir6")]
-position = Vector2(868, 303)
+position = Vector2(874, 324)
 player_index = 2
 metadata/_edit_group_ = true
 
@@ -139,8 +171,9 @@ texture = SubResource("AtlasTexture_8n4f2")
 metadata/_edit_vertical_guides_ = [640.0, 320.0]
 
 [node name="Camera2D" parent="." instance=ExtResource("6_1oqnx")]
+position = Vector2(-248, -168)
 
-[node name="WindArea" parent="." instance=ExtResource("7_leu7k")]
+[node name="WindArea" parent="Camera2D" instance=ExtResource("7_leu7k")]
 metadata/_edit_lock_ = true
 
 [connection signal="game_end" from="." to="UI" method="_on_level_game_end"]
@@ -151,7 +184,7 @@ metadata/_edit_lock_ = true
 [connection signal="change_points" from="Players/Player2" to="UI" method="_on_player_2_change_points"]
 [connection signal="end_turn" from="UI" to="." method="_on_ui_end_turn"]
 [connection signal="give_up" from="UI" to="." method="_on_ui_give_up"]
-[connection signal="new_wind" from="WindArea" to="UI" method="_on_wind_area_new_wind"]
+[connection signal="new_wind" from="Camera2D/WindArea" to="UI" method="_on_wind_area_new_wind"]
 
 [editable path="Level00"]
 [editable path="Players/Player1"]

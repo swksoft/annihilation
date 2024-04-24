@@ -17,7 +17,7 @@ var current_player: Player
 
 @onready var level_data = get_parent().get_parent().get_node("Level")
 @onready var player_data = get_parent().get_node("Players").get_children()
-@onready var wind = get_parent().get_node("WindArea")
+@onready var wind = get_parent().get_node("Camera2D").get_node("WindArea")
 
 @export var power_input : LineEdit
 
@@ -57,7 +57,7 @@ func display_message(text: String):
 	message.message_text = str(text)
 	add_child(message)
 
-func _process(delta):
+func _process(_delta):
 	if !can_shoot:
 		if TurnManager.during_turn:
 			return
@@ -173,7 +173,7 @@ func _on_level_turn_start(player):
 	display_message(str(player.p_name) + "'s turn!")
 	#player.my_turn(true)
 	current_player = player
-	current_player.p_name = player
+	#current_player.p_name = player
 	current_player.my_turn(true)
 	can_shoot = true
 	#print(player)
@@ -195,7 +195,6 @@ func angle_check():
 	if rotation <= 0: %AngleEdit.text = str(0)
 	if rotation >= 180: %AngleEdit.text = str(179)
 	print(float(%AngleEdit.text))
-
 
 func _on_player_1_change_points():
 	%P1PointsLabel.text = str(GLOBAL.p1_points)

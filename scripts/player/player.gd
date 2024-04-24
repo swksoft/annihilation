@@ -44,7 +44,7 @@ func _ready():
 	''' Rotation '''
 	cannon.rotation_degrees = rot
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	cannon.rotation_degrees = rot
 	
 	if not is_on_floor():
